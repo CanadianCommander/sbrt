@@ -1,0 +1,49 @@
+
+# General
+project-name:
+  desc: "The name of the micro service (artifact id)"
+project-human-name:
+  desc: "Alternate name to use in 'human' strings"
+  default: "{{project-name}}"
+project-description:
+  desc: "Description of the project"
+  default: "A service"
+project-package:
+  desc: "project package name"
+project-package-prefix:
+  desc: "Prefix for your package Ex: ca"
+  required: false
+  default: "org"
+container-user:
+  desc: "The container user's name"
+  required: false
+  default: "container_u"
+
+client:
+  # Typescript client
+  ts:
+    package-name:
+      desc: "The name of the ts client npm package"
+    npmrc-registry:
+      desc: ".npmrc registry string. Ex: '@<org>:registry=https://npm.pkg.github.com'"
+      default: "registry=https://registry.npmjs.org"
+
+  # Ruby client
+  ruby:
+    client-key:
+      desc: "The private gem repo key"
+    repo-url:
+      desc: "The private gem repo url"
+    module-name:
+      desc: "Module name of the ruby client"
+
+  # Java client
+  java:
+    deployment-repository:
+      desc: "The deployment repository Ex: 'github::default::https://maven.pkg.github.com/<org>/'"
+
+# Openshfit
+openshift:
+  image-path:
+    desc: "The openshift image registry path to push images to"
+

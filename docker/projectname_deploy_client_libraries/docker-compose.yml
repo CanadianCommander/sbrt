@@ -1,0 +1,11 @@
+services:
+  deploy_clients:
+    build:
+      context: ../../
+      dockerfile: ./docker/{{project-name}}_deploy_client_libraries/deploy_clients.Dockerfile
+    user: "${USER_ID}:${USER_GROUP_ID}"
+    volumes:
+      - ../../.:/opt/source/:Z
+      - ${USER_HOME}/.m2/:/home/{{container-user}}/.m2/:Z
+      - ${USER_HOME}/.gem/:/home/{{container-user}}/.gem/:Z
+      - ${USER_HOME}/.npmrc:/home/{{container-user}}/.npmrc:Z

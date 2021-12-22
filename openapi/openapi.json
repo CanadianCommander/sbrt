@@ -1,0 +1,13 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "OpenAPI definition",
+    "version" : "v0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:6666/api/v1/",
+    "description" : "Generated server url"
+  } ],
+  "paths" : {
+  }
+}

@@ -1,0 +1,11 @@
+<aspectj>
+    <weaver options="-Xreweavable -verbose -showWeaveInfo">
+        <include within="{{project-package-prefix}}.{{project-package}}.{{project-name}}.aspects.HibernateFilterAspect"/>
+        <include within="org.hibernate.internal.SessionFactoryImpl.SessionBuilderImpl"/>
+    </weaver>
+
+    <aspects>
+        <aspect name="{{project-package-prefix}}.{{project-package}}.{{project-name}}.aspects.HibernateFilterAspect"/>
+    </aspects>
+
+</aspectj>

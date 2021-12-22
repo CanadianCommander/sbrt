@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:14
+    volumes:
+      - ../../.docker/db/test/data:/var/lib/postgresql/data:Z
+    environment:
+      - POSTGRES_USER={{container-user}}
+      - POSTGRES_DB={{project-name}}_test
+      - POSTGRES_HOST_AUTH_METHOD=trust # <=== danger only DEV
+
+  spring_boot:
+    build:
+      context: ../../
+      dockerfile: ./docker/{{project-name}}_generate_api/spring_boot.Dockerfile
+    user: "${USER_ID}:${USER_GROUP_ID}"
+    volumes:
+      - ../../.:/opt/source/:Z
+    depends_on:
+      - db

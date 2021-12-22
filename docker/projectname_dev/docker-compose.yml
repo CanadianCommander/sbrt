@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:14
+    volumes:
+      - ../../.docker/db/dev/data:/var/lib/postgresql/data:Z
+    environment:
+      - POSTGRES_USER={{container-user}}
+      - POSTGRES_DB={{project-name}}_dev
+      - POSTGRES_HOST_AUTH_METHOD=trust # <=== danger only DEV
+    networks:
+      default:
+      static-network:
+        ipv4_address: 172.21.32.4
+
+  spring_boot:
+    build:
+      context: ../../
+      dockerfile: ./docker/{{project-name}}_dev/spring_boot.Dockerfile
+    user: "${USER_ID}:${USER_GROUP_ID}"
+    volumes:
+      - ../../.:/opt/source/:Z
+    networks:
+      default:
+      static-network:
+    depends_on:
+      - db
+
+networks:
+  static-network:
+    external: true
