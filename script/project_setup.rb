@@ -1,6 +1,8 @@
 require_relative "util/terminal_colors"
 require_relative "project_info"
 require_relative "code_formatter"
+require_relative "file_formatter"
+require_relative "project_tester"
 require "yaml"
 
 configuration = nil
@@ -25,3 +27,10 @@ ProjectInfo.collect(configuration)
 
 puts "Formatting project...\n".yellow
 CodeFormatter.replace_template_tags(configuration)
+FileFormatter.rename_files(configuration)
+
+if dev_mode
+  puts "Testing project... \n".yellow
+
+  ProjectTester.test_project
+end

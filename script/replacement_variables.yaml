@@ -9,8 +9,7 @@ project-package-prefix:
   required: false
   default: "org"
 project-human-name:
-  desc: "Alternate name to use in 'human' strings"
-  default: "{{project-name}}"
+  desc: "Project name in a nicer human format. (can have spaces)"
   allow-space: true
 project-description:
   desc: "Description of the project"

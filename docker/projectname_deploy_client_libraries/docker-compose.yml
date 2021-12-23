@@ -2,7 +2,7 @@ services:
   deploy_clients:
     build:
       context: ../../
-      dockerfile: ./docker/{{project-name}}_deploy_client_libraries/deploy_clients.Dockerfile
+      dockerfile: ./docker/{{project-name-lower}}_deploy_client_libraries/deploy_clients.Dockerfile
     user: "${USER_ID}:${USER_GROUP_ID}"
     volumes:
       - ../../.:/opt/source/:Z

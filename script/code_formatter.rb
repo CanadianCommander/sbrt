@@ -5,13 +5,15 @@ module CodeFormatter
   # @param [Hash] configuration - the project configuration
   def self.replace_template_tags(configuration)
 
-    puts "\tReplacing template tags".yellow
+    print "\tReplacing template tags... ".yellow
 
     configuration.each_key do |key|
       unless ProjectInfo::SPECIAL_KEYS.include?(key)
-        `find ../* -type f -regextype posix-egrep -regex ".*pom.xml" -exec sed -i 's/{{#{key}}}/#{configuration[key]["input"]}/g' {} \\;`
-        #`find ./* -type f -regextype posix-egrep -regex ".*(java|xml|sh|Dockerfile|yaml|yml|json)"`
+        # ya that's right. quick N dirty.
+        `find ../* -type f -regextype posix-egrep -regex ".*\\.(java|xml|sh|Dockerfile|yaml|yml|json|properties)" -exec sed -i 's/{{#{key}}}/#{configuration[key]["input"]}/g' {} \\;`
       end
     end
+
+    print "Ok\n".green
   end
 end

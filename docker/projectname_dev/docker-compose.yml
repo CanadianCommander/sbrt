@@ -15,7 +15,7 @@ services:
   spring_boot:
     build:
       context: ../../
-      dockerfile: ./docker/{{project-name}}_dev/spring_boot.Dockerfile
+      dockerfile: ./docker/{{project-name-lower}}_dev/spring_boot.Dockerfile
     user: "${USER_ID}:${USER_GROUP_ID}"
     volumes:
       - ../../.:/opt/source/:Z

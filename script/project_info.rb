@@ -34,6 +34,23 @@ module ProjectInfo
         end
       end
     end
+
+    self.add_computed_configuration(configuration)
+  end
+
+  # add computed configuration values
+  # @param [Hash] configuration - project configuration
+  def self.add_computed_configuration(configuration)
+
+    # computed value for spring boot project class
+    configuration["ProjectClass"] = {
+      "input" => configuration["project-name"]["input"].split(/[_-]/).collect(&:capitalize).join
+    }
+
+    # lower case version of project name
+    configuration["project-name-lower"] = {
+      "input" => configuration["project-name"]["input"].downcase
+    }
   end
 
   # validate user input for a configuration item

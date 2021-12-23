@@ -26,6 +26,14 @@ export DEV_MODE
 which ruby > /dev/null
 if (( $? == 1 )); then
   echo "Ruby not detected on your system. Please install it and try again. See: https://www.ruby-lang.org/en/downloads/"
+  exit 1
+fi
+
+# check for docker
+which docker > /dev/null
+if (( $? == 1 )); then
+  echo "Docker not detected on your system. Please install it and try again. See: https://docs.docker.com/engine/install/"
+  exit 1
 fi
 
 if [[ $DEV_MODE ]]; then
@@ -33,13 +41,14 @@ if [[ $DEV_MODE ]]; then
 
   echo "Copying template to testing directory, target/deploy_test/"
   # copy code to test directory
-  rm -rf ../target/deploy_test
+  sudo rm -rf ../target/deploy_test
   mkdir -p ../target/deploy_test
   cp -r ../docker ../target/deploy_test/
   cp -r ../lib ../target/deploy_test/
   cp -r ../openapi ../target/deploy_test/
   cp -r ../script ../target/deploy_test/
   cp -r ../src ../target/deploy_test/
+  cp -r ../.mvn ../target/deploy_test/
   cp -r ../mvnw* ../target/deploy_test/
   cp -r ../pom.xml ../target/deploy_test/
 
