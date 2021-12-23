@@ -36,7 +36,7 @@ if (( $? == 1 )); then
   exit 1
 fi
 
-if [[ $DEV_MODE ]]; then
+if [[ $DEV_MODE == true ]]; then
   pushd "$(dirname "$0")" > /dev/null || exit 1
 
   echo "Copying template to testing directory, target/deploy_test/"
