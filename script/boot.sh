@@ -22,6 +22,13 @@ done
 
 export DEV_MODE
 
+# check for git
+which git > /dev/null
+if (( $? == 1 )); then
+  echo "Git not detected on your system. Please install it and try again. See: https://git-scm.com/downloads"
+  exit 1
+fi
+
 # check for ruby
 which ruby > /dev/null
 if (( $? == 1 )); then
@@ -56,5 +63,10 @@ if [[ $DEV_MODE == true ]]; then
   ruby ./project_setup.rb
   popd > /dev/null && popd > /dev/null || exit 1
 else
-  echo "NOT DONE YET"
+  echo "Downloading template..."
+  git clone https://github.com/CanadianCommander/sbrt.git
+
+  pushd sbrt/script/ > /dev/null || exit 1
+  ruby ./project_setup.rb
+  popd > /dev/null || exit 1
 fi
