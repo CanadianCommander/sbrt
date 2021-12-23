@@ -52,7 +52,6 @@ elif [[ ${OPERATION} == "prod" ]]; then
   sudo -E docker container rm {{project-name}}_${OPERATION}_spring_boot_1
   sudo -E DOCKER_BUILDKIT=1 docker build --no-cache -f {{project-name}}_${OPERATION}/spring_boot.Dockerfile ../ -t "{{project-name}}_${OPERATION}_spring_boot"
 elif [[ ${OPERATION} == "deploy_staging" ]]; then
-  # TODO sbmicro fix this
   IMAGE_PATH={{openshift.image-path}}
   # build prod image
   ./docker.sh prod

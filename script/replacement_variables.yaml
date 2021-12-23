@@ -1,19 +1,21 @@
 
 # General
 project-name:
-  desc: "The name of the micro service (artifact id)"
+  desc: "The name of your new project. Also doubles as the Java package name"
+project-package:
+  desc: "Java organization package name for your project. Ex: org.<this value>.projectname"
+project-package-prefix:
+  desc: "Prefix for your package Ex: org"
+  required: false
+  default: "org"
 project-human-name:
   desc: "Alternate name to use in 'human' strings"
   default: "{{project-name}}"
+  allow-space: true
 project-description:
   desc: "Description of the project"
   default: "A service"
-project-package:
-  desc: "project package name"
-project-package-prefix:
-  desc: "Prefix for your package Ex: ca"
-  required: false
-  default: "org"
+  allow-space: true
 container-user:
   desc: "The container user's name"
   required: false

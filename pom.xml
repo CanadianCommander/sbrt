@@ -109,7 +109,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.2</version>
 			<scope>runtime</scope>
 		</dependency>
@@ -135,7 +135,7 @@
 						<configuration combine.self="override">
 							<excludes>
 								<!-- Exclude generated API client code form compilation -->
-								<exclude>{{project-package-prefix}}/{{project-organization}}/{{project-name}}/client/**/*.java</exclude>
+								<exclude>{{project-package-prefix}}/{{project-package}}/{{project-name}}/client/**/*.java</exclude>
 							</excludes>
 						</configuration>
 					</execution>
