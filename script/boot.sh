@@ -67,6 +67,6 @@ else
   git clone https://github.com/CanadianCommander/sbrt.git
 
   pushd sbrt/script/ > /dev/null || exit 1
-  ruby ./project_setup.rb
+  ruby ./project_setup.rb < /dev/tty
   popd > /dev/null || exit 1
 fi
