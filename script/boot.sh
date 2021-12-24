@@ -1,10 +1,12 @@
 #!/bin/bash
 DEV_MODE=false
+SKIP_TESTS=false
 
 print_usage()
 {
   echo "boot.sh  [-d]"
   echo "  -d if provided run in test mode. This script will expect to be inside the source code directory. It will not download any thing from GH."
+  echo "  -s skip tests. Only effects dev mode"
   exit 1
 }
 
@@ -12,15 +14,18 @@ if [[ "${1}" == "--help" ]] || [[ "${1}" == "-h" ]]; then
   print_usage
 fi
 
-while getopts "d" option; do
+while getopts "ds" option; do
   case ${option} in
     d ) DEV_MODE=true
+    ;;
+    s ) SKIP_TESTS=true
     ;;
     \? ) print_usage
   esac
 done
 
 export DEV_MODE
+export SKIP_TESTS
 
 # check for git
 which git > /dev/null

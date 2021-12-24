@@ -6,7 +6,8 @@ require_relative "project_tester"
 require "yaml"
 
 configuration = nil
-dev_mode = ENV["DEV_MODE"]
+dev_mode = ENV["DEV_MODE"] == "true"
+skip_tests = ENV["SKIP_TESTS"] == "true"
 
 puts "
 ========================================
@@ -29,7 +30,7 @@ puts "Formatting project...\n".yellow
 CodeFormatter.replace_template_tags(configuration)
 FileFormatter.rename_files(configuration)
 
-if dev_mode
+if dev_mode && !skip_tests
   puts "Testing project... \n".yellow
 
   ProjectTester.test_project
