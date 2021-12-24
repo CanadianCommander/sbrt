@@ -2,6 +2,13 @@
 Get a Spring Boot based REST API up and running fast. This project allows quick and easy generation
 of ready to code spring boot projects. Sort of a Spring Boot, Boot if you think about it.
 
+### Prerequisites 
+To run this template you need 
+- **Jdk 17** check your package manager
+- **Ruby** likely already installed by your distro
+- **Docker**  https://docs.docker.com/engine/install/
+- **Git** I suspect you already have this ;)
+
 ### Usage 
 To create a new project using this template simply paste this in your terminal and follow the prompts. 
 
