@@ -10,11 +10,18 @@ configuration = nil
 dev_mode = ENV["DEV_MODE"] == "true"
 skip_tests = ENV["SKIP_TESTS"] == "true"
 
-puts "
-========================================
-=== SBRT - Spring Boot Rest Template ===
-========================================
-".green
+welcome_message = <<-MSG
+=========================================
+    ░██████╗██████╗░██████╗░████████╗
+    ██╔════╝██╔══██╗██╔══██╗╚══██╔══╝
+    ╚█████╗░██████╦╝██████╔╝░░░██║░░░
+    ░╚═══██╗██╔══██╗██╔══██╗░░░██║░░░
+    ██████╔╝██████╦╝██║░░██║░░░██║░░░
+    ╚═════╝░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░
+        Spring Boot Rest Template
+=========================================
+MSG
+print welcome_message.green
 
 if dev_mode
   puts "Booting in DEV MODE".red
