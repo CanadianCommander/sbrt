@@ -1,12 +1,74 @@
+require_relative "util/user_input"
 
 module ProjectInfo
 
   # keys with special meaning. Ignore for regular parsing
-  SPECIAL_KEYS = %w[client openshift]
+  SPECIAL_KEYS = %w[client openshift enabled]
 
   # collect project information
   # @param [Hash] configuration - the configuration hash. The hash will be filled out with "value" attributes according to user response
   def self.collect(configuration)
+    self.collect_basic_info(configuration)
+    self.collect_api_client_info(configuration)
+    self.add_computed_configuration(configuration)
+  end
+
+  def self.collect_basic_info(configuration)
+    self.collect_user_input(configuration)
+  end
+
+  def self.collect_api_client_info(configuration)
+    if UserInput.yes_no_question("Setup API client libraries?")
+
+      # TS
+      if UserInput.yes_no_question("Setup TypeScript API?")
+        configuration["client"]["ts"]["enabled"] = true
+        self.collect_user_input(configuration["client"]["ts"])
+      else
+        puts "Skipping".yellow
+      end
+
+      # Java
+      if UserInput.yes_no_question("Setup Java API?")
+        configuration["client"]["java"]["enabled"] = true
+        self.collect_user_input(configuration["client"]["java"])
+      else
+        puts "Skipping".yellow
+      end
+
+      # Ruby
+      if UserInput.yes_no_question("Setup Ruby API?")
+        configuration["client"]["ruby"]["enabled"] = true
+        self.collect_user_input(configuration["client"]["ruby"])
+      else
+        puts "Skipping".yellow
+      end
+
+    else
+      puts "Skipping".yellow
+    end
+  end
+
+  # add computed configuration values
+  # @param [Hash] configuration - project configuration
+  def self.add_computed_configuration(configuration)
+
+    # computed value for spring boot project class
+    configuration["ProjectClass"] = {
+      "input" => configuration["project-name"]["input"].split(/[_-]/).collect(&:capitalize).join
+    }
+
+    # lower case version of project name
+    configuration["project-name-lower"] = {
+      "input" => configuration["project-name"]["input"].downcase
+    }
+  end
+
+  protected
+
+  # Collect user input for the given configuration level.
+  # @param [Hash] configuration - the configuration details to collect
+  def self.collect_user_input(configuration)
     configuration.each_key do |key|
       unless SPECIAL_KEYS.include?(key)
         puts "> #{key}".blue
@@ -34,23 +96,6 @@ module ProjectInfo
         end
       end
     end
-
-    self.add_computed_configuration(configuration)
-  end
-
-  # add computed configuration values
-  # @param [Hash] configuration - project configuration
-  def self.add_computed_configuration(configuration)
-
-    # computed value for spring boot project class
-    configuration["ProjectClass"] = {
-      "input" => configuration["project-name"]["input"].split(/[_-]/).collect(&:capitalize).join
-    }
-
-    # lower case version of project name
-    configuration["project-name-lower"] = {
-      "input" => configuration["project-name"]["input"].downcase
-    }
   end
 
   # validate user input for a configuration item

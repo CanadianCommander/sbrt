@@ -25,6 +25,17 @@ module FileFormatter
     `mv ../docker/projectname_generate_api ../docker/#{configuration["project-name-lower"]["input"]}_generate_api`
     `mv ../docker/projectname_prod ../docker/#{configuration["project-name-lower"]["input"]}_prod`
 
+    # delete unused api scripts
+    unless configuration["client"]["ts"]["enabled"]
+      `rm ../docker/#{configuration["project-name-lower"]["input"]}_deploy_client_libraries/deploy_ts.sh`
+    end
+    unless configuration["client"]["java"]["enabled"]
+      `rm ../docker/#{configuration["project-name-lower"]["input"]}_deploy_client_libraries/deploy_java.sh`
+    end
+    unless configuration["client"]["ruby"]["enabled"]
+      `rm ../docker/#{configuration["project-name-lower"]["input"]}_deploy_client_libraries/deploy_ruby.sh`
+    end
+
     print "Ok\n".green
   end
 end

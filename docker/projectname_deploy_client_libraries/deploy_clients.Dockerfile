@@ -29,13 +29,4 @@ RUN /home/{{container-user}}/.rbenv/bin/rbenv install 3.0.1
 RUN /home/{{container-user}}/.rbenv/bin/rbenv global 3.0.1
 
 # TODO sbmicro fix this
-CMD ./mvnw clean package -Dmaven.test.skip=true && \
-    cd target/generated-sources/client/ts/ && \
-    echo '{{client.ts.npmrc-registry}}' > .npmrc &&\
-    npm install && \
-    npm publish && \
-    cd ../ruby/ && \
-    /home/{{container-user}}/.rbenv/shims/gem build {{project-name}}-ruby-client.gemspec && \
-    /home/{{container-user}}/.rbenv/shims/gem push --key {{client.ruby.client-key}} --host {{client.ruby.client-repo-url}} {{project-name}}-ruby-client*.gem && \
-    cd ../java/ && \
-    ../../../../mvnw deploy -DaltDeploymentRepository={{client.java.deployment-repository}}{{project-name}}-java-client
+ENTRYPOINT ["./docker/{{project-name-lower}}_deploy_client_libraries/deploy.sh"]

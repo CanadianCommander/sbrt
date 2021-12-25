@@ -1,16 +1,16 @@
 
 # General
+project-human-name:
+  desc: "The name of your project"
+  allow-space: true
 project-name:
-  desc: "The name of your new project. Also doubles as the Java package name"
+  desc: "Java package name of your project"
 project-package:
   desc: "Java organization package name for your project. Ex: org.<this value>.projectname"
 project-package-prefix:
   desc: "Prefix for your package Ex: org"
   required: false
   default: "org"
-project-human-name:
-  desc: "Project name in a nicer human format. (can have spaces)"
-  allow-space: true
 project-description:
   desc: "Description of the project"
   default: "A service"
@@ -32,11 +32,12 @@ client:
   # Ruby client
   ruby:
     client-key:
-      desc: "The private gem repo key"
+      desc: "gem repo key"
     repo-url:
-      desc: "The private gem repo url"
+      desc: "Gem repo url"
+      default: "https://rubygems.org"
     module-name:
-      desc: "Module name of the ruby client"
+      desc: "Ruby module name for your client (namespace)"
 
   # Java client
   java:
