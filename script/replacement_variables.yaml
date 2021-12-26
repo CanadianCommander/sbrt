@@ -47,5 +47,5 @@ client:
 # Openshfit
 openshift:
   image-path:
-    desc: "The openshift image registry path to push images to"
+    desc: "The openshift image registry url"
 

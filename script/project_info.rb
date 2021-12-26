@@ -10,6 +10,7 @@ module ProjectInfo
   def self.collect(configuration)
     self.collect_basic_info(configuration)
     self.collect_api_client_info(configuration)
+    self.collect_open_shift_info(configuration)
     self.add_computed_configuration(configuration)
   end
 
@@ -17,6 +18,8 @@ module ProjectInfo
     self.collect_user_input(configuration)
   end
 
+  # collect information about API client library setup from the user.
+  # @param [Hash] configuration - project configuration hash to fill out
   def self.collect_api_client_info(configuration)
     if UserInput.yes_no_question("Setup API client libraries?")
 
@@ -44,6 +47,17 @@ module ProjectInfo
         puts "Skipping".yellow
       end
 
+    else
+      puts "Skipping".yellow
+    end
+  end
+
+  # collect information about openshift setup from the user
+  # @param [Hash] configuration - the configuration to fill out.
+  def self.collect_open_shift_info(configuration)
+    if UserInput.yes_no_question("Setup OpenShift? (production deployment)")
+
+      self.collect_user_input(configuration["openshift"])
     else
       puts "Skipping".yellow
     end

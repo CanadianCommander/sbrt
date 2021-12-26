@@ -52,7 +52,7 @@ elif [[ ${OPERATION} == "prod" ]]; then
   sudo -E docker container rm {{project-name-lower}}_${OPERATION}_spring_boot_1
   sudo -E DOCKER_BUILDKIT=1 docker build --no-cache -f {{project-name-lower}}_${OPERATION}/spring_boot.Dockerfile ../ -t "{{project-name-lower}}_${OPERATION}_spring_boot"
 elif [[ ${OPERATION} == "deploy_staging" ]]; then
-  IMAGE_PATH={{openshift.image-path}}
+  IMAGE_PATH='{{openshift.image-path}}'
   # build prod image
   ./docker.sh prod
   echo $(oc whoami -t) | sudo -E docker login --username $(oc whoami) --password-stdin $IMAGE_PATH

@@ -23,6 +23,13 @@ module CodeFormatter
       end
     end
 
+    # openshift
+    configuration["openshift"].each_key do |openshift_setting|
+      unless ProjectInfo::SPECIAL_KEYS.include?(openshift_setting)
+        self.replace_tag("openshift.#{openshift_setting}", configuration["openshift"][openshift_setting]["input"])
+      end
+    end
+
     print "Ok\n".green
   end
 
