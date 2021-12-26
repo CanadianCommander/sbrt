@@ -6,6 +6,10 @@ module FileFormatter
 
     print "\tRenaming Files... ".yellow
 
+    # delete git folder & clear readme
+    `rm -rf ../.git`
+    `echo '##{configuration["project-human-name"]["input"]}' > ../README.md`
+
     # rename application class file
     `mv ../src/main/java/projectpackageprefix/projectpackage/projectname/ProjectName.java ../src/main/java/projectpackageprefix/projectpackage/projectname/#{configuration["ProjectClass"]["input"]}.java`
     `mv ../src/test/java/projectpackageprefix/projectpackage/projectname/ProjectNameTests.java ../src/test/java/projectpackageprefix/projectpackage/projectname/#{configuration["ProjectClass"]["input"]}Tests.java`
