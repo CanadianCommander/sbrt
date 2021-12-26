@@ -1,5 +1,6 @@
 package {{project-package-prefix}}.{{project-package}}.{{project-name}}.api.v1.crud;
 
+import java.util.UUID;
 import {{project-package-prefix}}.{{project-package}}.{{project-name}}.model.AbstractBaseModel;
 import {{project-package-prefix}}.{{project-package}}.{{project-name}}.repository.BaseRepository;
 import {{project-package-prefix}}.{{project-package}}.{{project-name}}.service.ApplicationResponseFactory;
@@ -8,29 +9,9 @@ import {{project-package-prefix}}.{{project-package}}.{{project-name}}.transfer.
 import {{project-package-prefix}}.{{project-package}}.{{project-name}}.converter.AbstractInboundTransferToAbstractModelConverter;
 import {{project-package-prefix}}.{{project-package}}.{{project-name}}.converter.AbstractModelToTransferConverter;
 import {{project-package-prefix}}.{{project-package}}.{{project-name}}.transfer.AbstractModelTransfer;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.UUID;
-
-public interface AbstractCRController<Model extends AbstractBaseModel, Transfer extends AbstractModelTransfer, InboundTransfer extends AbstractModelInboundTransfer>
-		extends AbstractRController<Model, Transfer, InboundTransfer>
+public interface CRUDControllerBase<Model extends AbstractBaseModel, Transfer extends AbstractModelTransfer, InboundTransfer extends AbstractModelInboundTransfer>
 {
-
-	// ==========================================================================
-	// Endpoints
-	// ==========================================================================
-
-
-	@PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	default ApplicationResponse<Transfer> create(@RequestBody InboundTransfer transfer)
-	{
-		Model newModel = this.getModelRepository().save(this.getTransferToModelConverter().convert(transfer));
-		return ApplicationResponseFactory.okResponse(this.getModelToTransferConverter().convert(newModel));
-	}
-
-
 	// ==========================================================================
 	// Public Methods
 	// ==========================================================================
