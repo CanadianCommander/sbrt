@@ -8,7 +8,7 @@ module FileFormatter
 
     # delete git folder & clear readme
     `rm -rf ../.git`
-    `echo '##{configuration["project-human-name"]["input"]}' > ../README.md`
+    `printf '##{configuration["project-human-name"]["input"]} \n#{configuration["project-description"]["input"]}' > ../README.md`
 
     # rename application class file
     `mv ../src/main/java/projectpackageprefix/projectpackage/projectname/ProjectName.java ../src/main/java/projectpackageprefix/projectpackage/projectname/#{configuration["ProjectClass"]["input"]}.java`
